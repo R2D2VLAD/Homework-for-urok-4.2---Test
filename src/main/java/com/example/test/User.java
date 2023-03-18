@@ -7,23 +7,21 @@ public class User {
     private String login;
     private String email;
 
-    public User(String login, String email) {
-        this.login = login;
-        this.email = email;
-    }
-    public String userEmail(String email) {
-        if (email.contains("@") && email.contains(".")) {
-            return email;
-        } else {
-            throw new IllegalArgumentException ("В параметрах запроса отсутсвует знак @ или .");
-        }
+    public User() {
     }
 
-    public boolean equalsParameters(String login, String email) {
+    public User(String login, String email) {
+        this.login = login;
+        this.email = userEmail(email);
+    }
+    public String userEmail(String email) {
+        if (!email.contains("@") && !email.contains(".")) {
+            throw new IllegalArgumentException ("В параметрах запроса отсутсвует знак @ или .");
+        }
         if (login.equals(email)) {
-            return false;
+            throw new IllegalArgumentException("Поля E-mail и Логин совподают!");
         } else {
-            return true;
+            return email;
         }
     }
 
